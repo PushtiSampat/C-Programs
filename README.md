@@ -1,6 +1,8 @@
 # C-Programs
-Any Type of C Programs
-C Program to Find ASCII Value of a Character
+
+## Any Type of C Programs ##
+
+### C Program to Find ASCII Value of a Character ###
 
 #include <stdio.h>
 int main() {  
@@ -15,7 +17,8 @@ int main() {
     return 0;
 }
 
-C Program to Multiply Two Floating-Point Numbers
+### C Program to Multiply Two Floating-Point Numbers ###
+
 #include <stdio.h>
 int main() {
     double a, b, product;
@@ -32,7 +35,8 @@ int main() {
 }
 
 
-C Program to Swap Two Numbers
+### C Program to Swap Two Numbers ###
+
 #include<stdio.h>
 int main() {
   double first, second, temp;
@@ -56,7 +60,8 @@ int main() {
   return 0;
 }
 
-C Program to Check Whether a Number is Even or Odd
+### C Program to Check Whether a Number is Even or Odd ###
+
 #include <stdio.h>
 int main() {
     int num;
@@ -72,7 +77,8 @@ int main() {
     return 0;
 }
 
-C Program to Check Whether a Number is Prime or not 
+### C Program to Check Whether a Number is Prime or not ###
+
 #include<stdio.h>  
 int main(){    
     int n,i,m=0,flag=0;    
@@ -93,7 +99,8 @@ int main(){
     return 0;  
  }    
  
- c program to check Armstrong Number in C
+ ### c program to check Armstrong Number in C ###
+ 
  #include<stdio.h>  
  int main()    
 {    
@@ -114,8 +121,9 @@ int main(){
     return 0;  
 }   
 
- c program to check whether number is palindrome or not
- #include<stdio.h>  
+### c program to check whether number is palindrome or not ###
+ 
+#include<stdio.h>  
 int main()    
 {    
     int n,r,sum=0,temp;    
@@ -133,4 +141,22 @@ int main()
     else    
         printf("not palindrome");   
     return 0;  
+}
+
+### c program for Strings and Pointers ###
+
+#include <stdio.h>
+int main(void) {
+  char name[] = "Harry Potter";
+
+  printf("%c", *name);     // Output: H
+  printf("%c", *(name+1));   // Output: a
+  printf("%c", *(name+7));   // Output: o
+
+  char *namePtr;
+
+  namePtr = name;
+  printf("%c", *namePtr);     // Output: H
+  printf("%c", *(namePtr+1));   // Output: a
+  printf("%c", *(namePtr+7));   // Output: o
 }
