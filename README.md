@@ -203,18 +203,35 @@ int main() {
     }  
 
 ### c program for Sum of digits.
-        #include<stdio.h>  
-        int main()    
+    #include<stdio.h>  
+    int main()    
+    {    
+        int n,sum=0,m;    
+        printf("Enter a number:");    
+        scanf("%d",&n);    
+        while(n>0)    
         {    
-            int n,sum=0,m;    
-            printf("Enter a number:");    
-            scanf("%d",&n);    
-            while(n>0)    
-            {    
-                m=n%10;    
-                sum=sum+m;    
-                n=n/10;    
-            }    
-            printf("Sum is=%d",sum);    
-            return 0;  
-        }   
+            m=n%10;    
+            sum=sum+m;    
+            n=n/10;    
+        }    
+        printf("Sum is=%d",sum);    
+        return 0;  
+    }   
+### c program for reverse number.
+
+    #include<stdio.h>  
+    int main()    
+    {    
+    int n, reverse=0, rem;    
+    printf("Enter a number: ");    
+    scanf("%d", &n);    
+    while(n!=0)    
+    {    
+        rem=n%10;    
+        reverse=reverse*10+rem;    
+        n/=10;    
+    }    
+    printf("Reversed Number: %d",reverse);    
+    return 0;  
+    }   
