@@ -785,3 +785,19 @@ int main()
 	return 0;
 }
 
+## C program to find Volume of Cube
+
+int main()
+{
+	
+	float side,area;
+	printf("enter side of cube: ");
+	scanf("%f",&side);
+	
+   
+	area=side*side*side;
+	printf("VOC: %f\n",area);
+	return 0;
+}
+
+
