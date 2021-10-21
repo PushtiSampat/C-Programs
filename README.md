@@ -753,4 +753,21 @@ int main() {
           }    
              return 0;  
         }  
+        
+ ###  C program to find Area of Equil. Triangle
+
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	float area,a;
+	printf("enter side of the triangle: ");
+	scanf("%f",&a);
+ 
+	area=(sqrt(3)/4)*a*a;
+	printf("AOET:%f\n",area);
+	return 0;
+}
+
+
 
