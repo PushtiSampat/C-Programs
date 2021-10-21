@@ -609,50 +609,64 @@ int main() {
     getch();
     }          
     
-###C Program to Calculate Area of Circle###
-#include<stdio.h>
-
-int main() {
-   float radius, area;
-
-   printf("\nEnter the radius of Circle : ");
-   scanf("%d", &radius);
-
-   area = 3.14 * radius * radius;
-   printf("\nArea of Circle : %f", area);
-
-   return (0);
-}
-
 ### C Program to Find Roots of a Quadratic Equation
-#include <math.h>
-#include <stdio.h>
-int main() {
-    double a, b, c, discriminant, root1, root2, realPart, imagPart;
-    printf("Enter coefficients a, b and c: ");
-    scanf("%lf %lf %lf", &a, &b, &c);
+    #include <math.h>
+    #include <stdio.h>
+    int main() {
+        double a, b, c, discriminant, root1, root2, realPart, imagPart;
+        printf("Enter coefficients a, b and c: ");
+        scanf("%lf %lf %lf", &a, &b, &c);
 
-    discriminant = b * b - 4 * a * c;
+        discriminant = b * b - 4 * a * c;
 
-    // condition for real and different roots
-    if (discriminant > 0) {
-        root1 = (-b + sqrt(discriminant)) / (2 * a);
-        root2 = (-b - sqrt(discriminant)) / (2 * a);
-        printf("root1 = %.2lf and root2 = %.2lf", root1, root2);
+        // condition for real and different roots
+        if (discriminant > 0) {
+            root1 = (-b + sqrt(discriminant)) / (2 * a);
+            root2 = (-b - sqrt(discriminant)) / (2 * a);
+            printf("root1 = %.2lf and root2 = %.2lf", root1, root2);
+        }
+
+        // condition for real and equal roots
+        else if (discriminant == 0) {
+            root1 = root2 = -b / (2 * a);
+            printf("root1 = root2 = %.2lf;", root1);
+        }
+
+        // if roots are not real
+        else {
+            realPart = -b / (2 * a);
+            imagPart = sqrt(-discriminant) / (2 * a);
+            printf("root1 = %.2lf+%.2lfi and root2 = %.2f-%.2fi", realPart, imagPart, realPart, imagPart);
+        }
+
+        return 0;
+    } 
+
+### C Program to Check Leap Year
+    #include <stdio.h>
+    int main() {
+       int year;
+       printf("Enter a year: ");
+       scanf("%d", &year);
+
+       // leap year if perfectly divisible by 400
+       if (year % 400 == 0) {
+          printf("%d is a leap year.", year);
+       }
+       // not a leap year if divisible by 100
+       // but not divisible by 400
+       else if (year % 100 == 0) {
+          printf("%d is not a leap year.", year);
+       }
+       // leap year if not divisible by 100
+       // but divisible by 4
+       else if (year % 4 == 0) {
+          printf("%d is a leap year.", year);
+       }
+       // all other years are not leap years
+       else {
+          printf("%d is not a leap year.", year);
+       }
+
+       return 0;
     }
-
-    // condition for real and equal roots
-    else if (discriminant == 0) {
-        root1 = root2 = -b / (2 * a);
-        printf("root1 = root2 = %.2lf;", root1);
-    }
-
-    // if roots are not real
-    else {
-        realPart = -b / (2 * a);
-        imagPart = sqrt(-discriminant) / (2 * a);
-        printf("root1 = %.2lf+%.2lfi and root2 = %.2f-%.2fi", realPart, imagPart, realPart, imagPart);
-    }
-
-    return 0;
-} 
