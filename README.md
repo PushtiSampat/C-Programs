@@ -1104,3 +1104,55 @@ int main()
         }
         return n;
     }
+
+### C Program to count number of characters, spaces, tabs & newlines in a file.
+
+    #include <stdio.h>
+    void readContents(char *);
+    void main()
+    {
+        readContents("input6.txt");
+    }
+    void readContents(char *filename)
+    {
+        FILE *fp = fopen(filename, "r");
+        char line[100];
+        int i, characters = 0, spaces = 0, tabs = 0, newlines = 0, words = 0;
+        if (!fp)
+        {
+            printf("Cannot open the file \'%s\'\n", filename);
+        }
+        else
+        {
+            while (!feof(fp))
+            {
+                fgets(line, 100, fp);
+                i = 0;
+                while (line[i] != '\0')
+                {
+                    ++characters;
+                    if (line[i] == '\t')
+                    {
+                        ++tabs;
+                        if (line[i + 1] != ' ' && line[i + 1] != '\n' && line[i + 1] != '\t')
+                            ++words;
+                    }
+                    else if (line[i] == '\n')
+                    {
+                        ++newlines;
+                        if (line[i + 1] != ' ' && line[i + 1] != '\n' && line[i + 1] != '\t')
+                            ++words;
+                    }
+                    else if (line[i] == ' ')
+                    {
+                        ++spaces;
+                        if (line[i + 1] != ' ' && line[i + 1] != '\n' && line[i + 1] != '\t')
+                            ++words;
+                    }
+                    ++i;
+                }
+            }
+            printf("There are %d characters, %d spaces, %d tabs, %d newlines & %d words.\n", characters,
+                spaces, tabs, newlines, words + 1);
+        }
+    }
