@@ -1036,3 +1036,71 @@ int main()
         }
     }
 
+### C Program to find a word in file and print number of occurances.
+
+    #include <stdio.h>
+    #include <string.h>
+    int searchWordInFile(char *, char *, int);
+    int wordsInFile(char *, char *);
+    void main()
+    {
+        char filename[20], word[20];
+        int index, n;
+        printf("Enter filename: ");
+        scanf("%[^\n]s", filename);
+        printf("Enter word to search: ");
+        scanf("%s", word);
+        index = searchWordInFile(filename, word, 0);
+        if (index == -2)
+        {
+            printf("Unable to open the file\n");
+        }
+        else if (index == -1)
+        {
+            printf("Word not found!\n");
+        }
+        else
+        {
+            printf("Word found at index %d\n", index);
+            n = wordsInFile(filename, word);
+            printf("%s occours %d times\n", word, n);
+        }
+    }
+    int searchWordInFile(char *filename, char *word, int startPos)
+    {
+        FILE *fptr;
+        char fileWord[20];
+        int fi, i, index = -1, storedIndex;
+        fptr = fopen(filename, "r");
+        if (!fptr)
+        {
+            return -2;
+        }
+        else
+        {
+            fseek(fptr, startPos, SEEK_SET);
+            while (!feof(fptr) && index == -1)
+            {
+                storedIndex = ftell(fptr);
+                fscanf(fptr, "%s", fileWord);
+                if (strcmp(fileWord, word) == 0)
+                {
+                    index = storedIndex;
+                }
+            }
+            fclose(fptr);
+        }
+        return (index > 0 ? index + 1 : index);
+    }
+    int wordsInFile(char *filename, char *word)
+    {
+        int n = 0, index;
+        int len = strlen(word);
+        index = searchWordInFile(filename, word, 0);
+        while (index != -1)
+        {
+            ++n;
+            index = searchWordInFile(filename, word, index + len - 1);
+        }
+        return n;
+    }
