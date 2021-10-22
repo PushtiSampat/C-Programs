@@ -1230,3 +1230,84 @@ int main()
         }
         fclose(fp);
     }
+
+
+### C Program to remove all comment from a C File.
+
+    #include <stdio.h>
+    #include <string.h>
+    #include <stdlib.h>
+    #define TEMP_FILE "temp9"
+
+    void readContents(char *);
+    void removeComments(char *);
+
+    void main()
+    {
+        char filename[20];
+
+        printf("Enter the name of C file: ");
+        scanf("%s", filename);
+        printf("Before removing comments\n\n");
+        readContents(filename);
+        removeComments(filename);
+        printf("\n\nAfter removing comments\n\n");
+        readContents(filename);
+    }
+
+    void removeComments(char *filename)
+    {
+        FILE *fp = fopen(filename, "r");
+        FILE *fp2 = fopen(TEMP_FILE, "w");
+        char ch;
+        if (!fp)
+        {
+            printf("Cannot open the file \'%s\'\n", filename);
+        }
+        else
+        {
+            while ((ch = getc(fp)) != EOF)
+            {
+                if (ch == '/')
+                {
+                    ch = getc(fp);
+                    if (ch == '/')
+                    {
+                        while((ch = getc(fp)) != EOF && ch != '\n') {}
+                    }
+                    
+                    if (ch == '*')
+                    {
+                        while ((ch = getc(fp)) != EOF)
+                        {
+                            if (ch == '*')
+                            {
+                                ch = getc(fp);
+                                if (ch == '/')
+                                {
+                                    ch = getc(fp);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                putc(ch, fp2);
+            }
+            fclose(fp);
+            fclose(fp2);
+            remove(filename);
+            rename(TEMP_FILE, filename);
+        }
+    }
+
+    void readContents(char *filename)
+    {
+        char ch;
+        FILE *fp = fopen(filename, "r");
+        while ((ch = getc(fp)) != EOF)
+        {
+            printf("%c", ch);
+        }
+        fclose(fp);
+    }
