@@ -1156,3 +1156,77 @@ int main()
                 spaces, tabs, newlines, words + 1);
         }
     }
+
+
+### C Program to remove all occurances of a specific word from a file.
+
+    #include <stdio.h>
+    #include <string.h>
+    #define TEMP_FILE "temp7"
+
+    void removeStringFromFile(char *, char *);
+    void readContents(char *);
+
+    void main()
+    {
+        char filename[20], str[10];
+
+        printf("Enter name of the file with data: ");
+        scanf("%s", filename);
+        printf("Enter string to remove: ");
+        scanf("%s", str);
+
+        removeStringFromFile(filename, str);
+        printf("Contents of file after removing the string\n");
+        readContents(filename);
+    }
+
+    void removeStringFromFile(char *filename, char *str)
+    {
+        FILE *fp = fopen(filename, "r");
+        FILE *fp2 = fopen(TEMP_FILE, "w");
+        int i, savepoint, length;
+        char ch;
+        if (!fp)
+        {
+            printf("Cannot open file \'%s\'\n", filename);
+        }
+        else
+        {
+            length = strlen(str);
+            while ((ch = getc(fp)) != EOF)
+            {
+                savepoint = ftell(fp);
+                i = 0;
+                while(str[i] != '\0') {
+                    if(ch != str[i]) {
+                        break;
+                    }
+                    ch = getc(fp);
+                    i++;
+                }
+                
+                if (i != length)
+                {
+                    fseek(fp, savepoint - 1, SEEK_SET);
+                    ch = getc(fp);
+                }
+                putc(ch, fp2);
+            }
+        fclose(fp);
+        fclose(fp2);
+        remove(filename);
+        rename(TEMP_FILE, filename);
+        }
+    }
+
+    void readContents(char *filename)
+    {
+        char ch;
+        FILE *fp = fopen(filename, "r");
+        while ((ch = getc(fp)) != EOF)
+        {
+            printf("%c", ch);
+        }
+        fclose(fp);
+    }
