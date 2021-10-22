@@ -940,3 +940,99 @@ int main()
 	    printf("Remainder = %d", remainder);
 	    return 0;
 	}
+
+### C Program to copy the contents of one file to another and also print the no. of lines in the first file.
+
+    #include <stdio.h>
+    int copyContents(char *, char *);
+    void printContents(char *);
+    void main(int argc, char *argv[])
+    {
+        int lines;
+        if (argc < 3)
+        {
+            printf("Too few arguments provided!\n");
+        }
+        else if (argc > 3)
+        {
+            printf("Too many arguments provided!\n");
+        }
+        else
+        {
+            lines = copyContents(argv[1], argv[2]);
+            if (lines == -1)
+            {
+                printf("An error occoured!\n");
+            }
+            else
+            {
+                printf("There are %d lines in \'%s\' file.\n", lines, argv[1]);
+                printf("Contents of file 2: \n");
+                printContents(argv[2]);
+            }
+        }
+    }
+    int copyContents(char *file1, char *file2)
+    {
+        FILE *src, *dest;
+        char ch;
+        int lines_count = 0;
+        src = fopen(file1, "r");
+        if (src == NULL)
+        {
+            printf("There was a problem while opening \'%s\' file.\n", file1);
+            return -1;
+        }
+        dest = fopen(file2, "w");
+        if (dest == NULL)
+        {
+            printf("There was a problem while opening \'%s\' file.\n", file2);
+            return -1;
+        }
+        while ((ch = getc(src)) != EOF)
+        {
+            if (ch == '\n')
+            {
+                lines_count++;
+            }
+            putc(ch, dest);
+        }
+        if (!feof(src))
+        {
+            perror("\nError: ");
+            return 
+            -1;
+        }
+        fclose(src);
+        fclose(dest);
+
+        return lines_count + 1;
+    }
+
+    void printContents(char *filename)
+    {
+        FILE *fp;
+        char ch;
+        fp = fopen(filename, "r");
+        if (fp == NULL)
+        {
+            printf("\'%s\' file not found!\n", filename);
+        }
+        else
+        {
+            while ((ch = getc(fp)) != EOF)
+            {
+                printf("%c", ch);
+            }
+            if (feof(fp))
+            {
+                printf("\nEnd of \'%s\' file.\n", filename);
+            }
+            else
+            {
+                perror("\nError: ");
+            }
+            fclose(fp);
+        }
+    }
+
