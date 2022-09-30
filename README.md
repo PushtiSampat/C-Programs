@@ -2,6 +2,16 @@
 
 ## Any Type of C Programs ##
 
+
+### C Program without main() function ###
+
+#include<stdio.h>    
+ #define start main    
+void start() {    
+   printf("Hello");    
+}
+
+
 ### C Program to Find ASCII Value of a Character ###
 
 #include <stdio.h>
